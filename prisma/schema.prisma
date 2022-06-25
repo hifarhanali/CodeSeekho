@@ -12,8 +12,10 @@ datasource db {
 }
 
 // Link Model
-model Link {
-  id     Int    @id @default(autoincrement())
-  url    String @unique
-  linkId String @unique
+model Snippet {
+  id                   Int      @id @default(autoincrement())
+  code                 String
+  programming_language String
+  likes                Int
+  postedAt             DateTime
 }

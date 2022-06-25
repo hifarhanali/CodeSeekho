@@ -8,27 +8,17 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
-  const { url } = req.body;
-  const id = Math.random().toString(36).substr(2, 6);
-  const existUrl = await prisma.link.findMany({ where: { url } });
-
-  if (existUrl.length !== 0) {
-    return res.status(201).json(existUrl[0].linkId);
-  }
-
+  const { snippetInfo } = req.body;
   try {
-    await prisma.link.create({
-      data: {
-        url,
-        linkId: id
-      }
+    const snippet = await prisma.snippet.create({
+      data: snippetInfo
     })
-
-    res.status(201).json(id);
+    res.status(201).json({
+      data: snippet
+    });
 
   } catch (err) {
     console.log(err);
     res.status(401).json(err);
   }
-
 }
