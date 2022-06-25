@@ -1,8 +1,3 @@
-# URL Shortener
-
-URL Shortener Using Next.js, Prisma & Tailwindcss
-
-![screenshot](https://i.ibb.co/y4htV64/ShortUrl.png)
 
 ## Technology Stack:
 
@@ -25,9 +20,3 @@ npm install
 ```
 # Run
 npm run dev
-
-```
-
-- Version: 1.0.0
-- License: MIT
-- Author: Said Mounaim

@@ -5,6 +5,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// TODO: change url to your database url
 datasource db {
   provider = "sqlite"
   url      = "file:./db.db"
