@@ -1,19 +1,50 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// TODO: change url to your database url
 datasource db {
   provider = "sqlite"
   url      = "file:./db.db"
 }
 
-// Link Model
-model Link {
-  id     Int    @id @default(autoincrement())
-  url    String @unique
-  linkId String @unique
+model User {
+	email String @unique @id
+	name String 
+	photo String @default("https://www.gravatar.com/avatar/{email}?s=200")
+  password String
+	profession String
+  snippets Snippet[] 
+  collections Collection[]
+  reviews Review[]
+}
+
+model Collection {
+  id Int @id @unique @default(autoincrement())
+	name String 
+	snippets Snippet[]
+  user User @relation(fields: [userId], references: [email])
+  userId String
+}
+
+model Snippet {
+  id Int @id @unique @default(autoincrement())
+  name String
+  collection Collection @relation(fields: [collectionId], references: [id])
+  collectionId Int 
+  code String
+	programmingLanguage String
+	likes Int @default(0)
+	postedAt DateTime @default(now())
+	reviews Review[]
+  user User @relation(fields: [userId], references: [email])
+  userId String
+}
+
+model Review {
+  id Int @id @unique @default(autoincrement())
+  user User @relation(fields: [userId], references: [email])
+  userId String
+  snippet Snippet @relation(fields: [snippetId], references: [id])
+  snippetId Int
+  review String
 }
