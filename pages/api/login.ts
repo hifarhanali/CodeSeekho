@@ -11,28 +11,31 @@ export default async function handler(
     res.status(405).end()
   }
   
-  const { email, password } = JSON.parse(req.body);
+  const { email, password } = req.body;
   try {
     const user = await prisma.user.findUnique({
-        where: {
-            email: email
-        }
+      where: {
+        email: email
+      }
     })
     if (!user) {
-        return res.status(401).json({
-            message: "User does not exist"
-        })
+      return res.status(401).json({
+        message: "User does not exist"
+      })
     }
     const passwordMatch = await bcrypt.compare(password, user.password)
     if (passwordMatch) {
-        return res.json({
-            email: user.email,
-            token: generateToken(email),
-        })
+      
+      return res.status(200).json({
+        email: user.email,
+        name: user.name,
+        profession: user.profession,
+        token: generateToken(email),
+      })
     } else {
-        return res.status(401).json({
-            message: "Invalid Credentials"
-        })
+      return res.status(401).json({
+        message: "Invalid Credentials"
+      })
     }
   } catch (err) {
     console.log(err);

@@ -19,7 +19,7 @@ const createReview = async(req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const { review, snippetId} = JSON.parse(req.body)
+        const { review, snippetId} = req.body
         const m_review = await prisma.review.create({
             data: {
                 review,

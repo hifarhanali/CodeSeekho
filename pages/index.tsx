@@ -1,15 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import React, { useState } from 'react';
+import Header from '../components/header';
 
 const Home: NextPage = () => {
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-slate-400">
+    <div className="">
       <Head>
         <title>Code Seekho</title>
         <link rel="icon" href="/public/assets/logo.png" />
       </Head>
+
+      <Header />
     </div>
   )
 }
