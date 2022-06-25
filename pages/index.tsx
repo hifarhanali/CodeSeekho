@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const Home: NextPage = () => {
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-slate-400">
+    <div className="h-screen w-screen flex justify-center items-center bg-primary-900">
       <Head>
         <title>Code Seekho</title>
         <link rel="icon" href="/public/assets/logo.png" />
