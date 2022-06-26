@@ -6,7 +6,7 @@ import Header from '../components/header';
 const Home: NextPage = () => {
 
   return (
-    <div className="">
+    <div className="h-screen w-screen flex justify-center items-center bg-primary-900">
       <Head>
         <title>Code Seekho</title>
         <link rel="icon" href="/public/assets/logo.png" />

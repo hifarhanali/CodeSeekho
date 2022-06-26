@@ -4,11 +4,9 @@
 
 
 body {
-    background-color: black;
     padding: 0%;
     margin: 0%;
-}
-
-.hover {
-    background-color: #f5f5f5;
+    background: "#0f172a";
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
