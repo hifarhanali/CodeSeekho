@@ -18,7 +18,7 @@ const Header: React.FC = ({ }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
   return (
     <>
-      <div className="bg-primary-background flex justify-between text-md p-4 box-content uppercase text-white  shadow-[white] shadow-xl " style={{ borderBottom: "1px solid gray" }} >
+      <div className="bg-primary-900 flex justify-between text-md p-4 box-content uppercase text-white  shadow-[white] shadow-xl " style={{ borderBottom: "1px solid gray" }} >
         <div className="lg:hidden block">
           <Link href="/" passHref>
             <div className="text-xl font-bold mr-4">
@@ -47,8 +47,8 @@ const Header: React.FC = ({ }) => {
             <>
               <div className="hidden lg:flex space-x-6 items-center">
                 <div className="p-2 box-content bg-white bg-opacity-20 rounded-lg">{state.user?.email.split("@")[0]}</div>
-                <div><Link href={"/users"} passHref><BsFillPersonFill size={28} /></Link></div>
-                <div className="bg-primary-button p-2 px-4 font-bold text-primary-background rounded-lg" onClick={(e) => logout(dispatch)}>
+                <div><Link href={"/personal"} passHref><BsFillPersonFill size={28} /></Link></div>
+                <div className="bg-white bg-opacity-20 p-2 px-4 font-bold text-primary-background rounded-lg" onClick={(e) => logout(dispatch)}>
                   Logout
                 </div>
               </div>
@@ -109,7 +109,7 @@ const Header: React.FC = ({ }) => {
             state.isAuth ? <div className="text-center w-full">
 
               <div className="p-2 box-content bg-white bg-opacity-20 rounded-lg">{state.user?.email.split("@")[0]}</div>
-              <div className="flex items-center justify-center p-2 bg-white bg-opacity-20 rounded-md my-4"><Link href={"/users"} passHref><BsFillPersonFill size={24} /></Link></div>
+              <div className="flex items-center justify-center p-2 bg-white bg-opacity-20 rounded-md my-4"><Link href={"/personal"} passHref><BsFillPersonFill size={24} /></Link></div>
               <div className="bg-primary-button p-2 px-4 font-bold text-primary-background rounded-lg" onClick={(e) => logout(dispatch)}>
                 Logout
               </div>

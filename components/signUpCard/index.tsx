@@ -16,7 +16,9 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ isOpen, setIsOpen }) => {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [confirmPassword, setConfirmPassword] = React.useState("")
+    const [profession, setProfression] = React.useState("")
     const [localError, setLocalError] = React.useState("")
+    const [name, setName] = React.useState("")
     const {state,  dispatch } = React.useContext(UserContext)
     
     const handleSignUp = () => {
@@ -31,7 +33,8 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ isOpen, setIsOpen }) => {
         register(dispatch, {
             email: email,
             password: password,
-            username: email.split("@")[0]
+            profession: profession,
+            name: name
         }).then(() => {
             setLocalError("")
             setIsOpen(false)
@@ -57,8 +60,12 @@ const SignUpCard: React.FC<SignUpCardProps> = ({ isOpen, setIsOpen }) => {
                     {
                         state.loading && <Loader />
                     }
+                    <div className="my-2 text-lg">Name</div>
+                    <InputBar placeholder="John Doe" type="text" value={name} onChange={(e) => setName((e.target as HTMLInputElement).value)}/>
                     <div className="my-2 text-lg">Email</div>
                     <InputBar placeholder="john@gmail.com" type="email" value={email} onChange={(e) => setEmail((e.target as HTMLInputElement).value)}/>
+                    <div className="my-2 text-lg">Profession</div>
+                    <InputBar placeholder="Software Engineer @ Netflix" type="text" value={profession} onChange={(e) => setProfression((e.target as HTMLInputElement).value)}/>
                     <div className="my-2 text-lg">Password</div>
                     <InputBar placeholder="Password" type="password" value={password} onChange={(e) => setPassword((e.target as HTMLInputElement).value)}/>
                     <div className="my-2 text-lg">Confirm Password</div>

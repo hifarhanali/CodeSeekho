@@ -18,7 +18,8 @@ export default async function handler(
         }
         const collections = await prisma.collection.findMany({
             include: {
-                user: true
+                user: true,
+                snippets: true
             }
         })
         res.status(200).json(collections)

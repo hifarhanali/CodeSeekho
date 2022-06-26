@@ -1,7 +1,7 @@
 
 import { Dispatch } from "react"
 
-import { LoginPayload } from "./types"
+import { LoginPayload, RegistrationPayload } from "./types"
 
 export const checkUserLoggedIn = (dispatch: Dispatch<any>) => {
     dispatch({type: "LOGIN_REQUEST"})
@@ -43,7 +43,7 @@ export const login = async (dispatch: Dispatch<any>, loginPayload: LoginPayload)
     }
 }
 
-export const register = async (dispatch: Dispatch<any>, registerPayload: any) => {
+export const register = async (dispatch: Dispatch<any>, registerPayload: RegistrationPayload) => {
     try {
         dispatch({type: "REGISTER_REQUEST"})
         const _user = await fetch("/api/register", {

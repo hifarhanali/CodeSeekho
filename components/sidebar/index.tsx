@@ -1,13 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import useOutsideAlerter from '../../hooks/useOutsideAlerter'
 import Collection from '../collection'
 
 import { isObjectExist } from "../../utils/finder"
+import { UserContext } from '../../contexts/UserContext'
 
 
 
-const Sidebar = ({ collections, setCollections, setCurrentSnippet }) => {
-
+const Sidebar = ({ collections, setCollections, setCurrentSnippet, setCurrentCollection }) => {
+    const {state} = useContext(UserContext)
     const [open, setOpen] = useState(true)
     const [newCollectionNameVisibilityFlag, setNewCollectionNameVisibilityFlag] = useState(false);
     const [newCollectionName, setNewCollectionName] = useState("");
@@ -26,11 +27,20 @@ const Sidebar = ({ collections, setCollections, setCurrentSnippet }) => {
 
     useEffect(() => {
         const createNewCollection = () => {
-            if (newCollectionName.length > 0) {
+            if (newCollectionName.length > 0 && state.user) {
                 // insert collection if it does not exist
                 if (!isObjectExist(collections, ["name"], newCollectionName)) {
 
-                    // TODO: create new collection in the database
+                    fetch("/api/collections", {
+                        body: JSON.stringify({
+                            name: newCollectionName
+                        }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${state.user?.jwt}`
+                        },
+                        method: "POST"
+                    })
 
                     setCollections([...collections, { name: newCollectionName, snippets: [] }])
                 }
@@ -70,7 +80,7 @@ const Sidebar = ({ collections, setCollections, setCurrentSnippet }) => {
                     </h1>
                 </div>
                 <ul className="pt-6">
-                    {collections.map((collection, index) => (
+                    {collections?.map((collection, index) => (
                         <li
                             key={index}
                             className=
@@ -83,6 +93,7 @@ const Sidebar = ({ collections, setCollections, setCurrentSnippet }) => {
                                 collections={collections}
                                 setCollections={setCollections}
                                 open={open} setCurrentSnippet={setCurrentSnippet}
+                                setCurrentCollection={setCurrentCollection}
                             />
                         </li>
                     ))

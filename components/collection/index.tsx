@@ -1,12 +1,13 @@
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { AiOutlineFolderAdd } from 'react-icons/ai'
 import { isObjectExist } from "../../utils/finder"
 import useOutsideAlerter from '../../hooks/useOutsideAlerter'
+import { UserContext } from '../../contexts/UserContext'
 
 
-const Collection = ({ collectionIndex, collection, collections, setCollections, open, setCurrentSnippet }) => {
-
+const Collection = ({ setCurrentCollection, collectionIndex, collection, collections, setCollections, open, setCurrentSnippet }) => {
+    const {state} = useContext(UserContext)
     const [newSnippetNameVisibilityFlag, setNewSnippetNameVisibilityFlag] = useState(false);
     const [newSnippetName, setNewSnippetName] = useState("");
 
@@ -37,11 +38,21 @@ const Collection = ({ collectionIndex, collection, collections, setCollections, 
 
                     }
 
+                    fetch("/api/snippets", {
+                        body: JSON.stringify(newSnippet),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${state.user?.jwt}`
+                        },
+                        method: "POST"
+                    })
+
                     const newCollections = [...collections]
                     newCollections[collectionIndex].snippets.push(newSnippet)
                     setCollections(newCollections)
                     setNewSnippetNameVisibilityFlag(false)
                     setCurrentSnippet(newSnippet)
+                    setCurrentCollection(collection.id)
                 }
                 setNewSnippetName("")
             }

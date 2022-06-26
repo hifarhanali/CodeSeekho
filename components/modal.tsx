@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ id, isOpen, setIsOpen, header, body, foot
     return (
         <div id={id} aria-hidden="true" className={`${isOpen ? 'flex bg-gray-400 bg-opacity-60' : 'hidden'} overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-0 z-50 justify-center items-center md:h-screen sm:h-screen md:inset-0`}>
             <div className="relative lg:px-4 sm:px-0 w-full max-w-2xl h-screen md:h-auto">
-                <div className="relative bg-primary-background rounded-lg shadow dark:bg-gray-900 h-screen lg:h-full">
+                <div className="relative bg-primary-900 rounded-lg shadow dark:bg-gray-900 h-screen lg:h-full">
                     <div className="flex justify-between items-start p-5 rounded-t border-b dark:border-gray-600">
                         <h3 className="text-2xl font-semibold text-primary-button lg:text-2xl dark:text-green-500 ">
                             {header}
