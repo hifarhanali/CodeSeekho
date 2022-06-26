@@ -1,8 +1,9 @@
 import dedent from 'dedent';
 
 
-export const codepostsList = [
+export const snippetsList = [
     {
+        id: 1,
         name: "react component",
         code:
             dedent`
@@ -31,6 +32,7 @@ export const codepostsList = [
         }
     },
     {
+        id: 2,
         name: "javascrip component",
         code:
             dedent`
@@ -59,6 +61,7 @@ export const codepostsList = [
         }
     },
     {
+        id: 3,
         name: "python programming langauge",
         code:
             dedent`

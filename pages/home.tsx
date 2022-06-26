@@ -1,25 +1,26 @@
+import { GetStaticProps } from 'next';
 import React, { useEffect } from 'react'
-import CodePost from '../components/CodePost'
-import { codepostsList } from "../data/codeposts"
+import Snippet from '../components/snippet'
+import { snippetsList } from "../data/snippets"
 
-const Home = () => {
+const Home = ({ snippetsData }) => {
 
     const [searchText, setSearchText] = React.useState("");
-    const [codeposts, setCodeposts] = React.useState(codepostsList)
-    const originalCodePosts = codepostsList
+    const [snippets, setsnippets] = React.useState(snippetsData)
+    const originalsnippets = snippetsList
 
     useEffect(() => {
-        filterCodePosts()
+        filterSnippets()
     }, [searchText])
 
 
-    const filterCodePosts = () => {
+    const filterSnippets = () => {
         if (searchText == "") {
-            setCodeposts(originalCodePosts)
+            setsnippets(originalsnippets)
         }
         else {
-            const filteredCodeposts = codeposts.filter(codepost => codepost.name.toLowerCase().includes(searchText.toLowerCase()))
-            setCodeposts(filteredCodeposts)
+            const filteredsnippets = snippets.filter(snippet => snippet.name.toLowerCase().includes(searchText.toLowerCase()))
+            setsnippets(filteredsnippets)
         }
     }
 
@@ -41,8 +42,8 @@ const Home = () => {
                 </div>
 
                 <div className='grid md:grid-cols-2 sm:grid-cols-1 gap-4'>
-                    {codeposts.map((codepost, index) => (
-                        <CodePost key={index} codepost={codepost} />
+                    {snippets.map((snippet, index) => (
+                        <Snippet key={index} snippetData={snippet} />
                     ))}
 
                 </div>
@@ -50,5 +51,18 @@ const Home = () => {
         </>
     )
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+
+    // TODO: get snippets from database
+    const snippets = snippetsList
+
+    return {
+        props: {
+            snippetsData: snippets
+        }
+    }
+}
+
 
 export default Home

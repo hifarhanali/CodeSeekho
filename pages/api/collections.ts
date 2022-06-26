@@ -25,7 +25,7 @@ const createCollection = async (req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const {name} = JSON.parse(req.body)
+        const {name} = req.body
         const collection = await prisma.collection.create({
             data: {
                 name,
@@ -67,7 +67,7 @@ const deleteCollection = async(req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const {id} = JSON.parse(req.body)
+        const {id} = req.body
         const collection = await prisma.collection.delete({
             where: {
                 id

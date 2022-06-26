@@ -1,6 +1,6 @@
 import dedent from 'dedent';
 
-export const collections = [
+export const collectionsList = [
     {
         name: 'HTML',
         snippets: [

@@ -16,7 +16,7 @@ export default async function handler(
                 message: "User not Authorized"
             })
         }
-        const {collectionId} = JSON.parse(req.body)
+        const {collectionId} = req.body
         const snippets = await prisma.snippet.findMany({
             where: {
                 collectionId

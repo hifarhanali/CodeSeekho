@@ -32,7 +32,7 @@ const SnippetEditor = ({ currentSnippet, setCurrentSnippet }) => {
     }
 
     const onSaveSnippet = () => {
-        // TODO: Save snippet here
+        // TODO: Save current snippet to database
         console.log("Save snippet")
     }
 

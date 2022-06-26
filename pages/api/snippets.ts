@@ -26,7 +26,7 @@ const createSnippet = async (req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const {code, name, collectionId, programmingLanguage} = JSON.parse(req.body)
+        const {code, name, collectionId, programmingLanguage} = req.body
         const snippet = await prisma.snippet.create({
             data: {
                 code,
@@ -81,13 +81,13 @@ const updateSnippet = async(req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const {id} = JSON.parse(req.body)
+        const {id} = req.body
         const snippet = await prisma.snippet.update({
             where: {
                 id
             },
             data: {
-                ...JSON.parse(req.body)
+                ...req.body
             }
         })
 
@@ -104,7 +104,7 @@ export const deleteSnippet = async(req: NextApiRequest, res: NextApiResponse) =>
                 message: "User not Authorized"
             })
         }
-        const {id} = JSON.parse(req.body)
+        const {id} = req.body
         const snippet = await prisma.snippet.findUnique({
             where: {
                 id: id
