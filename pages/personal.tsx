@@ -33,15 +33,15 @@ const Personal = () => {
 
     return (
         <>
-        <Header />
-        <div className={`bg-primary-900 min-h-screen h-full w-screen overflow-hidden`}>
-            <div className={`flex`}>
-                {loading && <Loader />}
-                <Sidebar collections={collections} setCollections={setCollections} setCurrentSnippet={setCurrentSnippet} setCurrentCollection={setCurrentCollection}/>
-                <SnippetEditor currentSnippet={currentSnippet} setCurrentSnippet={setCurrentSnippet} />
+            <Header />
+            <div className={`bg-primary-900 min-h-screen h-full w-screen overflow-hidden`}>
+                <div className={`flex`}>
+                    {loading && <Loader />}
+                    <Sidebar collections={collections} setCollections={setCollections} setCurrentSnippet={setCurrentSnippet} setCurrentCollection={setCurrentCollection} />
+                    <SnippetEditor currentSnippet={currentSnippet} setCurrentSnippet={setCurrentSnippet} currentCollection={currentCollection} />
 
+                </div>
             </div>
-        </div>
         </>
     )
 }

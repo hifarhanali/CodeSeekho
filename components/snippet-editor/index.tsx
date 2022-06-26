@@ -1,7 +1,8 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment, Component, useContext } from 'react'
 import Editor from 'react-simple-code-editor'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/duotoneLight'
+import { UserContext } from "../../contexts/UserContext"
 
 const styles = {
     root: {
@@ -11,7 +12,10 @@ const styles = {
     },
 }
 
-const SnippetEditor = ({ currentSnippet, setCurrentSnippet }) => {
+const SnippetEditor = ({ currentSnippet, setCurrentSnippet, currentCollection }) => {
+
+    const { state } = useContext(UserContext)
+
     const onValueChange = (code: string) => {
         console.log(code)
         setCurrentSnippet({ ...currentSnippet, code: code })
@@ -31,9 +35,22 @@ const SnippetEditor = ({ currentSnippet, setCurrentSnippet }) => {
         </Highlight>
     }
 
-    const onSaveSnippet = () => {
+    const onSaveSnippet = async () => {
         // TODO: Save current snippet to database
         console.log("Save snippet")
+
+        snippet = await fetch("/api/snippets", {
+            body: JSON.stringify({
+                ...currentSnippet,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${state.user?.jwt}`
+            },
+            method: "PUT"
+        })
+
+        console.log(currentSnippet)
     }
 
     return (

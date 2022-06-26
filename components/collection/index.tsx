@@ -7,7 +7,7 @@ import { UserContext } from '../../contexts/UserContext'
 
 
 const Collection = ({ setCurrentCollection, collectionIndex, collection, collections, setCollections, open, setCurrentSnippet }) => {
-    const {state} = useContext(UserContext)
+    const { state } = useContext(UserContext)
     const [newSnippetNameVisibilityFlag, setNewSnippetNameVisibilityFlag] = useState(false);
     const [newSnippetName, setNewSnippetName] = useState("");
 
@@ -34,9 +34,12 @@ const Collection = ({ setCurrentCollection, collectionIndex, collection, collect
                     const newSnippet = {
                         name: newSnippetName,
                         code: "",
-                        programming_language: "jsx",
-
+                        programmingLanguage: "jsx",
+                        collectionId: collection?.id
                     }
+
+                    console.log(newSnippet)
+
 
                     fetch("/api/snippets", {
                         body: JSON.stringify(newSnippet),

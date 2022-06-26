@@ -6,9 +6,8 @@ import { isObjectExist } from "../../utils/finder"
 import { UserContext } from '../../contexts/UserContext'
 
 
-
 const Sidebar = ({ collections, setCollections, setCurrentSnippet, setCurrentCollection }) => {
-    const {state} = useContext(UserContext)
+    const { state } = useContext(UserContext)
     const [open, setOpen] = useState(true)
     const [newCollectionNameVisibilityFlag, setNewCollectionNameVisibilityFlag] = useState(false);
     const [newCollectionName, setNewCollectionName] = useState("");
@@ -52,6 +51,13 @@ const Sidebar = ({ collections, setCollections, setCurrentSnippet, setCurrentCol
         }
     }, [newCollectionNameVisibilityFlag])
 
+
+    useEffect(() => {
+        // redirect user to home page if state is null
+        if (typeof state?.user === "undefined") {
+            window.location.href = "/"
+        }
+    }, [state])
 
 
     return (

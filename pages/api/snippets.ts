@@ -26,7 +26,7 @@ const createSnippet = async (req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const {code, name, collectionId, programmingLanguage} = req.body
+        const { code, name, collectionId, programmingLanguage } = req.body
         const snippet = await prisma.snippet.create({
             data: {
                 code,
@@ -42,13 +42,13 @@ const createSnippet = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         })
         res.status(201).json(snippet)
-    } catch(error) {
+    } catch (error) {
         console.log(error)
         res.status(400).end()
     }
 }
 
-const getSnippets = async(req: NextApiRequest, res: NextApiResponse) => {
+const getSnippets = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         // const user = await protect(req, res)
         // if (!user || !user.email) {
@@ -67,13 +67,13 @@ const getSnippets = async(req: NextApiRequest, res: NextApiResponse) => {
             }
         })
         res.status(200).json(snippets)
-    } catch(error) {
+    } catch (error) {
         console.log(error)
         res.status(400).json(error)
     }
 }
 
-const updateSnippet = async(req: NextApiRequest, res: NextApiResponse) => {
+const updateSnippet = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const user = await protect(req, res)
         if (!user || !user.email) {
@@ -81,7 +81,7 @@ const updateSnippet = async(req: NextApiRequest, res: NextApiResponse) => {
                 message: "User not Authorized"
             })
         }
-        const {id} = req.body
+        const { id } = req.body
         const snippet = await prisma.snippet.update({
             where: {
                 id
@@ -96,7 +96,7 @@ const updateSnippet = async(req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 
-export const deleteSnippet = async(req: NextApiRequest, res: NextApiResponse) => {
+export const deleteSnippet = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const user = await protect(req, res)
         if (!user || !user.email) {
@@ -104,7 +104,7 @@ export const deleteSnippet = async(req: NextApiRequest, res: NextApiResponse) =>
                 message: "User not Authorized"
             })
         }
-        const {id} = req.body
+        const { id } = req.body
         const snippet = await prisma.snippet.findUnique({
             where: {
                 id: id
@@ -117,9 +117,9 @@ export const deleteSnippet = async(req: NextApiRequest, res: NextApiResponse) =>
                 }
             })
             return res.status(200).json({})
-        } 
+        }
         return res.status(404).json({})
-    } catch(error) {
+    } catch (error) {
         console.log(error)
         res.status(400).json(error)
     }
